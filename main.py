@@ -9,7 +9,7 @@ def input_error(func):
         except KeyError:
             return "Contact does not exist!"
         except ValueError:
-            return "Give me name and phone please!"
+            return "Something went wrong"
         except IndexError:
             return "Please provide the required argument for the command."
     
@@ -34,14 +34,14 @@ def change_contact(args, book: AddressBook):
         return ValueError
     else:
         record.edit_phone(old_number, new_number)
-        return "Phone changed"
+        return "Contact updated"
 
     
 
 @input_error
 def show_phone(args, book: AddressBook):
     if len(args) !=1:
-        raise ValueError("Please provide the required argument for the command.")
+        raise ValueError
     name = args[0]
     if name not in book:
         raise KeyError
@@ -66,13 +66,13 @@ def add_birthday(args, book: AddressBook):
         record.add_birthday(date)
         return "Birthday added."
     else:
-        return f"Contact '{name}' not found in the address book."
+        return f"Contact '{name}' is not in the addressbook"
 
 
 @input_error
 def show_birthday(args, book):
     if len(args) != 1:
-        raise ValueError("Please provide the required argument for the command.")
+        raise ValueError
     name = args[0]
     if name not in book:
         raise KeyError
